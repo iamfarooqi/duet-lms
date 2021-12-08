@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>logIn</title>
+    <script src="./app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+
+    <!-- <form onsubmit="return login()">
+
+        <h1>LogIn</h1>
+
+        <label>Email</label> <br>
+        <input type="email" id="login-email"> <br>
+
+        <label>Password</label> <br>
+        <input type="text" id="login-password"> <br>
+
+        <button>Login</button>
+
+    </form> -->
+
+    <div class="padding container d-flex justify-content-center">
+        <div class="col-md-10 col-md-offset-1">
+
+            <form class="signup-form" onsubmit="return login()">
+                <h2 class="text-center">LOGIN NOW</h2>
+                <hr>
+
+                <div class="form-group"> 
+                    <input type="email" id="login-email" class="form-control" placeholder="Email Address" required="required">
+                 </div>
+
+                <div class="form-group"> 
+                    <input type="password" id="login-password" class="form-control" placeholder="Password" required="required"> 
+                </div>
+
+                <div class="form-group text-center"> 
+                    <button type="submit" class="btn btn-blue btn-block">LOGIN</button> 
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

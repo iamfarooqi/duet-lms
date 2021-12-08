@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forget Step-1</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./app.js"></script>
+</head>
+<body>
+
+    <div class="padding container d-flex justify-content-center">
+        <div class="col-md-10 col-md-offset-1">
+
+            <form class="signup-form" onsubmit="return forgot2()">
+                <h2 class="text-center">STEP 2</h2>
+                <hr>
+
+                <div class="form-group"> 
+                    <input type="email" id="email2" class="form-control" placeholder="Enter your email address" required="required">
+                 </div>
+
+                <div class="form-group"> 
+                    <input type="password" id="password2" class="form-control" placeholder="Enter your new password" required="required">
+                 </div>
+
+                <div class="form-group"> 
+                    <input type="number" id="otp" class="form-control" placeholder="Enter your OTP" required="required">
+                 </div>
+
+                <div class="form-group text-center"> 
+                    <button type="submit" class="btn btn-blue btn-block">FORGET</button> 
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    
+</body>
+</html>
