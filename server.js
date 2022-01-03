@@ -12,7 +12,7 @@ var postmark = require("postmark");
 const path = require("path");
 const axios = require('axios')
 
-var client = new postmark.Client("03d41ca2-fd57-4edd-9e9e-506ac1aaf894");
+// var client = new postmark.Client("03d41ca2-fd57-4edd-9e9e-506ac1aaf894");
 
 var SERVER_SECRET = process.env.SECRET || "1234"
 
@@ -20,9 +20,7 @@ var SERVER_SECRET = process.env.SECRET || "1234"
 
 
 
-// let dbURI = "mongodb+srv://iamfarooqi:03325312621@cluster0.8tr9b.mongodb.net/TestDataBase?retryWrites=true&w=majority";
 let dbURI = "mongodb+srv://duetstudents:duetstudents@studentsdata.jr39q.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-
 mongoose.connect(dbURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -64,36 +62,48 @@ var userSchema = new mongoose.Schema({
         'default': Date.now
     }
 });
-var stdModel = mongoose.model("duet-students", userSchema);
+var userModel = mongoose.model("users", userSchema);
 
 
 var otpSchema = new mongoose.Schema({
     "email": String,
     "otpCode": String,
-    "createdOn": { "type": Date, "default": Date.now },
+    "createdOn": {
+        "type": Date,
+        "default": Date.now
+    },
 });
 
 
 var otpModel = mongoose.model("otps", otpSchema);
 
 module.exports = {
-    stdModel: stdModel,
+    userModel: userModel,
     otpModel: otpModel
 }
 
 var app = express();
+app.use(cookieParser());
+app.use("/", express.static(path.resolve(path.join(__dirname, "public"))));
 
 app.use(bodyParser.json());
-app.use(cors(
-    {
-        origin: "*",
-        credentials: true
-    }
-));
 app.use(morgan('dev'));
-app.use(cookieParser());
+app.use(
+    cors({
+        credentials: true,
+     origin: ['http://127.0.0.1:5501'] 
 
-app.use("/", express.static(path.resolve(path.join(__dirname, "public"))));
+    })
+  );
+  
+
+// app.use(function (req, res, next) {
+//    //Enabling CORS
+//    res.header("Access-Control-Allow-Origin", "*");
+//    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+//    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
+//      next();
+//    });
 
 
 
@@ -102,46 +112,39 @@ app.use("/", express.static(path.resolve(path.join(__dirname, "public"))));
 
 app.post("/signup", (req, res, next) => {
 
-    if (!req.body.stdName ||
-        !req.body.stdDept ||
-        !req.body.stdBatch ||
-        !req.body.stdEmail ||
-        !req.body.stdPassword ||
-        !req.body.stdPhone
+    if (!req.body.userName ||
+        !req.body.userDept ||
+        !req.body.userBatch ||
+        !req.body.userEmail ||
+        !req.body.userPassword ||
+        !req.body.userPhone
     ) {
 
         res.status(403).send(`
-            please send name, email, password, phone and gender in json body.
+            please send name, email, password, phone  in json body.
             e.g:
             {
                 "name": "farooqi",
-                "dept": "CSE"
-                "Batch": "batch-19/F"
-                "email": "iamfarooqi@gmail.com",
+                "email": "farooqi@gmail.com",
                 "password": "12345",
-                "phone": "03325321621",
+                "phone": "03332765421",
                 
             }`)
         return;
     }
 
-
-
-
-
-    stdModel.findOne({ email: req.body.stdEmail },
-        function (err, doc) {
+    userModel.findOne({email: req.body.userEmail},function (err, doc) {
             if (!err && !doc) {
 
-                bcrypt.stringToHash(req.body.stdPassword).then(function (hash) {
+                bcrypt.stringToHash(req.body.userPassword).then(function (hash) {
 
-                    var newUser = new stdModel({
-                        "name": req.body.stdName,
-                        "dept": req.body.stdDept,
-                        "batch": req.body.stdBatch,
-                        "email": req.body.stdEmail,
+                    var newUser = new userModel({
+                        "name": req.body.userName,
+                        "dept": req.body.userDept,
+                        "batch": req.body.userBatch,
+                        "email": req.body.userEmail,
                         "password": hash,
-                        "phone": req.body.stdPhone,
+                        "phone": req.body.userPhone,
                     })
                     newUser.save((err, data) => {
                         if (!err) {
@@ -177,38 +180,39 @@ app.post("/signup", (req, res, next) => {
 //LOGIN
 
 app.post("/login", (req, res, next) => {
-
+    console.log('body', req.body)
     if (!req.body.email || !req.body.password) {
 
         res.status(403).send(`
                 please send email and password in json body.
                 e.g:
                 {
-                    "email": "iamfarooqi.com",
+                    "email": "farooqi@gmail.com",
                     "password": "abc",
                 }`)
         return;
     }
 
-    stdModel.findOne({ email: req.body.email },
-        function (err, std) {
+    userModel.findOne({
+            email: req.body.email
+        },
+        function (err, user) {
             if (err) {
                 res.status(500).send({
-                    message: "an error occured: " + JSON.stringify(err)
+                    message: "an error occurred: " + JSON.stringify(err)
                 });
-            } else if (std) {
+            } else if (user) {
 
-                bcrypt.varifyHash(req.body.password, std.password).then(isMatched => {
+                bcrypt.varifyHash(req.body.password, user.password).then(isMatched => {
                     if (isMatched) {
                         console.log("matched");
 
                         var token =
                             jwt.sign({
-                                id: std._id,
-                                name: std.name,
-                                email: std.email,
-                            }, SERVER_SECRET)
-
+                                id: user._id,
+                                name: user.name,
+                                email: user.email,
+                            }, SERVER_SECRET);
                         res.cookie('jToken', token, {
                             maxAge: 86_400_000,
                             httpOnly: true
@@ -217,13 +221,15 @@ app.post("/login", (req, res, next) => {
 
 
                         res.send({
+                            
                             message: "login success",
                             user: {
-                                name: std.name,
-                                email: std.email,
-                                phone: std.phone,
-                                gender: std.gender,
-                            }
+                                name: user.name,
+                                email: user.email,
+                                phone: user.phone,
+                                gender: user.gender,
+                            },
+                            token:token
                         });
 
                     } else {
@@ -245,6 +251,107 @@ app.post("/login", (req, res, next) => {
 
 })
 
+//Token
+
+app.use(function (req, res, next) {
+    const authHeader = req.get("Authorization");
+    if (!authHeader) {
+      const error = new Error("Not Authenticated");
+      error.statusCode = 401;
+      throw error;
+    }
+  
+    const token = req.get("Authorization").split(" ")[1];
+    let decodedToken = "";
+    try {
+      decodedToken = jwt.verify(token, SERVER_SECRET);
+      // console.log(decodedToken);
+      if (!decodedToken) {
+        const error = new Error("Not Authenticated");
+        error.statusCode = 401;
+        throw error;
+      } else {
+        //   console.log("else");
+        // console.log(decodedToken)
+        userModel.findById(decodedToken.id)
+          .then((user) => {
+              console.log(user)
+            req.userId = user._id;
+            next();
+          })
+          .catch(() => {
+            const error = new Error("No Admin Found");
+            error.statusCode = 401;
+            throw error;
+          });
+      }
+    } catch (err) {
+      err.statusCode = 500;
+      throw err;
+    }
+  });
+  
+  app.get("/profile", (req, res, next) => {
+    console.log('289',req.userId);
+  
+    userModel.findById(
+    //   req.body.jToken.id,
+    req.userId,
+      "name dept batch phone ",
+      function (err, data) {
+        if (!err) {
+          res.send({
+            userData: data,
+            // userData: data,
+          });
+        } else {
+          res.status(500).send({
+            message: "server error",
+          });
+        }
+      }
+    );
+  });
+
+
+
+    //PROFILE
+    // app.get('/', function (req, res) {
+    //     let posts = userModel.find({}, function(err, posts){
+    //         if(err){
+    //             console.log(err);
+    //         }
+    //         else {
+    //             res.json(posts);
+    //         }
+    //     });
+    // });
+
+// app.get("/profile", (req, res, next) => {
+//     console.log("hi")
+//     console.log('profile body', req.body)
+//     try {
+//         userModel.findById(req.body.jToken.id, 'name email phone gender createdOn',
+//         function (err, doc) {
+//             if (!err) {
+//                 res.send({
+//                     profile: doc
+//                 })
+
+//             } else {
+//                 res.status(500).send({
+//                     message: "server error"
+//                 })
+//             }
+//         })
+//     } catch (error) {
+//         res.status(500).send(error)
+//     }
+  
+// })
+  
+    
+
 
 
 //FORGOT PASSWORD
@@ -259,16 +366,18 @@ app.post("/forget-password", (req, res, next) => {
             please send email in json body.
             e.g:
             {
-                "email": "iamfarooqi@gmail.com"
+                "email": "farooqi@gmail.com"
             }`)
         return;
     }
 
-    stdModel.findOne({ email: req.body.email },
+    userModel.findOne({
+            email: req.body.email
+        },
         function (err, user) {
             if (err) {
                 res.status(500).send({
-                    message: "an error occured: " + JSON.stringify(err)
+                    message: "an error ocurred: " + JSON.stringify(err)
                 });
             } else if (user) {
                 const otp = Math.floor(getRandomArbitrary(11111, 99999))
@@ -278,20 +387,25 @@ app.post("/forget-password", (req, res, next) => {
                     otpCode: otp
                 }).then((doc) => {
 
-                    client.sendEmail({
-                        "From": "ahmed_student@sysborg.com",
-                        "To": req.body.email,
-                        "Subject": "Reset your password",
-                        "TextBody": `Here is your pasword reset code: ${otp}`
-                    }).then((status) => {
+                    // client.sendEmail({
+                    //     "From": "ahmed_student@sysborg.com",
+                    //     "To": req.body.email,
+                    //     "Subject": "Reset your password",
+                    //     "TextBody": `Here is your password reset code: ${otp}`
+                    // }).then((status) => {
 
-                        console.log("status: ", status);
-                        res.send({
-                            message: "Email Send OPT",
-                            status: 200
-                        })
+                    // console.log("status: ", status);
+                    //     res.send({
+                    //         message: "Email Send OPT",
+                    //         status: 200
+                    //     })
 
-                    })
+                    // })
+                    console.log("your OTP: ", otp);
+                    res.send({
+                                message: "Email Send OPT",
+                                status: 200
+                            })
 
                 }).catch((err) => {
                     console.log("error in creating otp: ", err);
@@ -315,34 +429,38 @@ app.post("/forget-password-step-2", (req, res, next) => {
             please send email & otp in json body.
             e.g:
             {
-                "email": "iamfarooqi@gmail.com",
+                "email": "farooqi@gmail.com",
                 "newPassword": "******",
                 "otp": "#####" 
             }`)
         return;
     }
 
-    stdModel.findOne({ email: req.body.email },
+    userModel.findOne({
+            email: req.body.email
+        },
         function (err, user) {
             if (err) {
                 res.status(500).send({
-                    message: "an error occured: " + JSON.stringify(err)
+                    message: "an error occurred: " + JSON.stringify(err)
                 });
             } else if (user) {
 
-                otpModel.find({ email: req.body.email },
+                otpModel.find({
+                        email: req.body.email
+                    },
                     function (err, otpData) {
 
 
 
                         if (err) {
                             res.status(500).send({
-                                message: "an error occured: " + JSON.stringify(err)
+                                message: "an error occurred: " + JSON.stringify(err)
                             });
                         } else if (otpData) {
                             otpData = otpData[otpData.length - 1]
 
-                            console.log("otpData: ", otpData);
+                            console.log("otpData ya abdullah opt: ", otpData);
 
                             const now = new Date().getTime();
                             const otpIat = new Date(otpData.createdOn).getTime(); // 2021-01-06T13:08:33.657+0000
@@ -354,8 +472,12 @@ app.post("/forget-password-step-2", (req, res, next) => {
                                 otpData.remove()
 
                                 bcrypt.stringToHash(req.body.newPassword).then(function (hash) {
-                                    user.update({ password: hash }, {}, function (err, data) {
-                                        res.send("password updated");
+                                    user.update({
+                                        password: hash
+                                    }, {}, function (err, data) {
+                                        res.send({
+                                            message:"Your password has been changed"
+                                        });
                                     })
                                 })
 
@@ -399,64 +521,7 @@ function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
 
-//PROFILE
 
-// app.get("/profile", (req, res, next) => {
-
-//     console.log(req.body)
-
-//     userModel.findById(req.body.jToken.id, 'name email phone gender createdOn',
-//         function (err, doc) {
-//             if (!err) {
-//                 res.send({
-//                     profile: doc
-//                 })
-
-//             } else {
-//                 res.status(500).send({
-//                     message: "server error"
-//                 })
-//             }
-//         })
-// })
-
-
-//COOKIES
-
-app.use(function (req, res, next) {
-
-    console.log("req.cookies: ", req.cookies);
-    if (!req.cookies.jToken) {
-        res.status(401).send("include http-only credentials with every request")
-        return;
-    }
-    jwt.verify(req.cookies.jToken, SERVER_SECRET, function (err, decodedData) {
-        if (!err) {
-
-            const issueDate = decodedData.iat * 1000;
-            const nowDate = new Date().getTime();
-            const diff = nowDate - issueDate; // 86400,000
-
-            if (diff > 300000) { // expire after 5 min (in milis)
-                res.status(401).send("token expired")
-            } else { // issue new token
-                var token = jwt.sign({
-                    id: decodedData.id,
-                    name: decodedData.name,
-                    email: decodedData.email,
-                }, SERVER_SECRET)
-                res.cookie('jToken', token, {
-                    maxAge: 86_400_000,
-                    httpOnly: true
-                });
-                req.body.jToken = decodedData
-                next();
-            }
-        } else {
-            res.status(401).send("invalid token")
-        }
-    });
-})
 
 
 
@@ -464,11 +529,11 @@ app.use(function (req, res, next) {
 app.listen(PORT, () => {
     console.log("server is running on: ", PORT);
 })
-        // newUser.save((err, data) => {
-        //     if (!err) {
-        //         res.send("user created")
-        //     } else {
-        //         console.log(err);
-        //         res.status(500).send("user create error, " + err)
-        //     }
-        // });
+// newUser.save((err, data) => {
+//     if (!err) {
+//         res.send("user created")
+//     } else {
+//         console.log(err);
+//         res.status(500).send("user create error, " + err)
+//     }
+// });
