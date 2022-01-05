@@ -212,7 +212,7 @@
   min-width: 400px;
   position: relative;
   /* display: flex; */
-  background: #E4E9F7;
+  /* background: #E4E9F7; */
   height: 100vh;
   left: 260px;
   width: calc(100% - 260px);

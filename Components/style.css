@@ -82,3 +82,15 @@ h2 {
     background: #fff;
     color: #496174
 }
+
+.donut {
+    display: flex; justify-content: center; align-items: center; padding-left: 2%;
+}
+
+#present{
+    color: rgb(21 151 207);
+}
+#absent{
+    color: red;
+    
+}

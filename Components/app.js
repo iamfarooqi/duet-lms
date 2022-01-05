@@ -1,5 +1,3 @@
-// import axios from ('axios');
-// const {default:axios} = require('axios')
 
 ///SignUP
 const url = "http://localhost:5000"
@@ -80,8 +78,8 @@ function Profile() {
         .then((response) => {
 
             document.getElementById('name').innerHTML = response.data.userData.name;
-            document.getElementById('dept').innerHTML = response.data.userData.dept;
-            document.getElementById('batch').innerHTML = response.data.userData.batch;
+            // document.getElementById('dept').innerHTML = response.data.userData.dept;
+            // document.getElementById('batch').innerHTML = response.data.userData.batch;
 
         },
             (error) => {
