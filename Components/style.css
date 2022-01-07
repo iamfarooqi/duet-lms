@@ -83,6 +83,9 @@ h2 {
     color: #496174
 }
 
+
+/* DASHBOARD PAGE CSS */
+
 .donut {
     display: flex; justify-content: center; align-items: center; padding-left: 2%;
 }
@@ -94,3 +97,48 @@ h2 {
     color: red;
     
 }
+
+/* COURSES PAGE CSS */
+
+.styled-table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    /* min-width: 750px; */
+    /* max-width: 630px; */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: rgb(21 151 207);
+    color: #ffffff;
+    text-align: left;
+    border-radius: 100px;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid rgb(149, 175, 185);
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid rgb(21 151 207);
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+
+

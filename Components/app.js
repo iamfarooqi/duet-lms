@@ -77,10 +77,12 @@ function Profile() {
     })
         .then((response) => {
 
-            document.getElementById('name').innerHTML = response.data.userData.name;
-            // document.getElementById('dept').innerHTML = response.data.userData.dept;
-            // document.getElementById('batch').innerHTML = response.data.userData.batch;
-
+            document.getElementById('name1').innerHTML = response.data.userData.name;
+            document.getElementById('name2').innerHTML = response.data.userData.name;
+            document.getElementById('phone').innerHTML = response.data.userData.phone;
+            document.getElementById('dept').innerHTML = response.data.userData.dept;
+            document.getElementById('batch').innerHTML = response.data.userData.batch;
+console.log(response.data)
         },
             (error) => {
                 console.log(error.message);
