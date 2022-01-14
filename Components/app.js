@@ -1,10 +1,14 @@
-///SignUP
+// var url = "https://duet-lms.herokuapp.com/";
+
 const url = "http://localhost:5000"
+
+///SignUP
+
 
 function signup() {
     axios({
         method: 'post',
-        url: "http://localhost:5000/signup",
+        url: url + "/signup",
         data: {
             userName: document.getElementById("name").value,
             userDept: document.getElementById("dept").value,
@@ -34,7 +38,7 @@ function login() {
     // idhar login karogay to token milega usko localstorage mai save karana
     axios({
         method: 'post',
-        url: "http://localhost:5000/login",
+        url: url +"/login",
         data: {
             email: document.getElementById("login-email").value,
             password: document.getElementById("login-password").value,
@@ -59,7 +63,7 @@ function login() {
 function Profile() {
     axios({
         method: "get",
-        url: "http://localhost:5000/profile",
+        url: url + "/profile",
         headers: {
             // Accept: 'application/json',
             // 'Content-Type': 'application/json',
@@ -90,7 +94,7 @@ function Profile() {
 function logout() {
     axios({
         method: 'post',
-        url: "http://localhost:5000/logout",
+        url: url + "/logout",
         headers: {
             // Accept: 'application/json',
             // 'Content-Type': 'application/json',
