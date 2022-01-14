@@ -91,11 +91,11 @@ app.use(morgan('dev'));
 app.use(
     cors({
         credentials: true,
-     origin: ['http://127.0.0.1:5501'] 
+        origin: ['http://127.0.0.1:5501']
 
     })
-  );
-  
+);
+
 
 // app.use(function (req, res, next) {
 //    //Enabling CORS
@@ -133,44 +133,44 @@ app.post("/signup", (req, res, next) => {
         return;
     }
 
-    userModel.findOne({email: req.body.userEmail},function (err, doc) {
-            if (!err && !doc) {
+    userModel.findOne({ email: req.body.userEmail }, function (err, doc) {
+        if (!err && !doc) {
 
-                bcrypt.stringToHash(req.body.userPassword).then(function (hash) {
+            bcrypt.stringToHash(req.body.userPassword).then(function (hash) {
 
-                    var newUser = new userModel({
-                        "name": req.body.userName,
-                        "dept": req.body.userDept,
-                        "batch": req.body.userBatch,
-                        "email": req.body.userEmail,
-                        "password": hash,
-                        "phone": req.body.userPhone,
-                    })
-                    newUser.save((err, data) => {
-                        if (!err) {
-                            res.send({
-                                message: "user created"
-                            })
-                        } else {
-                            console.log(err);
-                            res.status(500).send({
-                                message: "user create error, " + err
-                            })
-                        }
-                    });
+                var newUser = new userModel({
+                    "name": req.body.userName,
+                    "dept": req.body.userDept,
+                    "batch": req.body.userBatch,
+                    "email": req.body.userEmail,
+                    "password": hash,
+                    "phone": req.body.userPhone,
                 })
+                newUser.save((err, data) => {
+                    if (!err) {
+                        res.send({
+                            message: "user created"
+                        })
+                    } else {
+                        console.log(err);
+                        res.status(500).send({
+                            message: "user create error, " + err
+                        })
+                    }
+                });
+            })
 
-            } else if (err) {
-                res.status(500).send({
-                    message: "db error"
-                })
-            } else {
-                res.send({
-                    message: "User already exist ",
-                    status: 409
-                })
-            }
-        })
+        } else if (err) {
+            res.status(500).send({
+                message: "db error"
+            })
+        } else {
+            res.send({
+                message: "User already exist ",
+                status: 409
+            })
+        }
+    })
 
 })
 
@@ -192,21 +192,18 @@ app.post("/login", (req, res, next) => {
                 }`)
         return;
     }
-
     userModel.findOne({
-            email: req.body.email
-        },
+        email: req.body.email
+    },
         function (err, user) {
             if (err) {
                 res.status(500).send({
                     message: "an error occurred: " + JSON.stringify(err)
                 });
             } else if (user) {
-
                 bcrypt.varifyHash(req.body.password, user.password).then(isMatched => {
                     if (isMatched) {
                         console.log("matched");
-
                         var token =
                             jwt.sign({
                                 id: user._id,
@@ -217,11 +214,7 @@ app.post("/login", (req, res, next) => {
                             maxAge: 86_400_000,
                             httpOnly: true
                         });
-
-
-
                         res.send({
-                            
                             message: "login success",
                             user: {
                                 name: user.name,
@@ -229,7 +222,7 @@ app.post("/login", (req, res, next) => {
                                 phone: user.phone,
                                 gender: user.gender,
                             },
-                            token:token
+                            token: token
                         });
 
                     } else {
@@ -256,259 +249,64 @@ app.post("/login", (req, res, next) => {
 app.use(function (req, res, next) {
     const authHeader = req.get("Authorization");
     if (!authHeader) {
-      const error = new Error("Not Authenticated");
-      error.statusCode = 401;
-      throw error;
-    }
-  
-    const token = req.get("Authorization").split(" ")[1];
-    let decodedToken = "";
-    try {
-      decodedToken = jwt.verify(token, SERVER_SECRET);
-      // console.log(decodedToken);
-      if (!decodedToken) {
         const error = new Error("Not Authenticated");
         error.statusCode = 401;
         throw error;
-      } else {
-        //   console.log("else");
-        // console.log(decodedToken)
-        userModel.findById(decodedToken.id)
-          .then((user) => {
-              console.log(user)
-            req.userId = user._id;
-            next();
-          })
-          .catch(() => {
-            const error = new Error("No Admin Found");
+    }
+    const token = req.get("Authorization").split(" ")[1];
+    let decodedToken = "";
+    try {
+        decodedToken = jwt.verify(token, SERVER_SECRET);
+        // console.log(decodedToken);
+        if (!decodedToken) {
+            const error = new Error("Not Authenticated");
             error.statusCode = 401;
             throw error;
-          });
-      }
-    } catch (err) {
-      err.statusCode = 500;
-      throw err;
-    }
-  });
-  
-  app.get("/profile", (req, res, next) => {
-    console.log('289',req.userId);
-  
-    userModel.findById(
-    //   req.body.jToken.id,
-    req.userId,
-      "name dept batch phone ",
-      function (err, data) {
-        if (!err) {
-          res.send({
-            userData: data,
-            // userData: data,
-          });
         } else {
-          res.status(500).send({
-            message: "server error",
-          });
-        }
-      }
-    );
-  });
-
-
-
-    //PROFILE
-    // app.get('/', function (req, res) {
-    //     let posts = userModel.find({}, function(err, posts){
-    //         if(err){
-    //             console.log(err);
-    //         }
-    //         else {
-    //             res.json(posts);
-    //         }
-    //     });
-    // });
-
-// app.get("/profile", (req, res, next) => {
-//     console.log("hi")
-//     console.log('profile body', req.body)
-//     try {
-//         userModel.findById(req.body.jToken.id, 'name email phone gender createdOn',
-//         function (err, doc) {
-//             if (!err) {
-//                 res.send({
-//                     profile: doc
-//                 })
-
-//             } else {
-//                 res.status(500).send({
-//                     message: "server error"
-//                 })
-//             }
-//         })
-//     } catch (error) {
-//         res.status(500).send(error)
-//     }
-  
-// })
-  
-    
-
-
-
-//FORGOT PASSWORD
-
-
-
-app.post("/forget-password", (req, res, next) => {
-
-    if (!req.body.email) {
-
-        res.status(403).send(`
-            please send email in json body.
-            e.g:
-            {
-                "email": "farooqi@gmail.com"
-            }`)
-        return;
-    }
-
-    userModel.findOne({
-            email: req.body.email
-        },
-        function (err, user) {
-            if (err) {
-                res.status(500).send({
-                    message: "an error ocurred: " + JSON.stringify(err)
-                });
-            } else if (user) {
-                const otp = Math.floor(getRandomArbitrary(11111, 99999))
-
-                otpModel.create({
-                    email: req.body.email,
-                    otpCode: otp
-                }).then((doc) => {
-
-                    // client.sendEmail({
-                    //     "From": "ahmed_student@sysborg.com",
-                    //     "To": req.body.email,
-                    //     "Subject": "Reset your password",
-                    //     "TextBody": `Here is your password reset code: ${otp}`
-                    // }).then((status) => {
-
-                    // console.log("status: ", status);
-                    //     res.send({
-                    //         message: "Email Send OPT",
-                    //         status: 200
-                    //     })
-
-                    // })
-                    console.log("your OTP: ", otp);
-                    res.send({
-                                message: "Email Send OPT",
-                                status: 200
-                            })
-
-                }).catch((err) => {
-                    console.log("error in creating otp: ", err);
-                    res.status(500).send("unexpected error ")
+            //   console.log("else");
+            // console.log(decodedToken)
+            userModel.findById(decodedToken.id)
+                .then((user) => {
+                    console.log(user)
+                    req.userId = user._id;
+                    next();
                 })
-
-
-            } else {
-                res.status(403).send({
-                    message: "user not found"
+                .catch(() => {
+                    const error = new Error("No Admin Found");
+                    error.statusCode = 401;
+                    throw error;
                 });
-            }
-        });
-})
-
-app.post("/forget-password-step-2", (req, res, next) => {
-
-    if (!req.body.email && !req.body.otp && !req.body.newPassword) {
-
-        res.status(403).send(`
-            please send email & otp in json body.
-            e.g:
-            {
-                "email": "farooqi@gmail.com",
-                "newPassword": "******",
-                "otp": "#####" 
-            }`)
-        return;
+        }
+    } catch (err) {
+        err.statusCode = 500;
+        throw err;
     }
+});
 
-    userModel.findOne({
-            email: req.body.email
-        },
-        function (err, user) {
-            if (err) {
-                res.status(500).send({
-                    message: "an error occurred: " + JSON.stringify(err)
+app.get("/profile", (req, res, next) => {
+    console.log('289', req.userId);
+    userModel.findById(
+        //   req.body.jToken.id,
+        req.userId,
+        "name dept batch phone ",
+        function (err, data) {
+            if (!err) {
+                res.send({
+                    userData: data,
                 });
-            } else if (user) {
-
-                otpModel.find({
-                        email: req.body.email
-                    },
-                    function (err, otpData) {
-
-
-
-                        if (err) {
-                            res.status(500).send({
-                                message: "an error occurred: " + JSON.stringify(err)
-                            });
-                        } else if (otpData) {
-                            otpData = otpData[otpData.length - 1]
-
-                            console.log("otpData ya abdullah opt: ", otpData);
-
-                            const now = new Date().getTime();
-                            const otpIat = new Date(otpData.createdOn).getTime(); // 2021-01-06T13:08:33.657+0000
-                            const diff = now - otpIat; // 300000 5 minute
-
-                            console.log("diff: ", diff);
-
-                            if (otpData.otpCode === req.body.otp && diff < 300000) { // correct otp code
-                                otpData.remove()
-
-                                bcrypt.stringToHash(req.body.newPassword).then(function (hash) {
-                                    user.update({
-                                        password: hash
-                                    }, {}, function (err, data) {
-                                        res.send({
-                                            message:"Your password has been changed"
-                                        });
-                                    })
-                                })
-
-                            } else {
-                                res.status(401).send({
-                                    message: "incorrect otp"
-                                });
-                            }
-                        } else {
-                            res.status(401).send({
-                                message: "incorrect otp"
-                            });
-                        }
-                    })
-
             } else {
-                res.status(403).send({
-                    message: "user not found"
+                res.status(500).send({
+                    message: "server error",
                 });
             }
-        });
-})
-
-
+        }
+    );
+});
 
 
 //LOGOUT
-
-
-
 app.post("/logout", (req, res, next) => {
+    console.log(req.cookies)
     res.cookie('jToken', "", {
         maxAge: 86_400_000,
         httpOnly: true
@@ -520,20 +318,7 @@ app.post("/logout", (req, res, next) => {
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
-
-
-
-
-
 //Server
 app.listen(PORT, () => {
     console.log("server is running on: ", PORT);
 })
-// newUser.save((err, data) => {
-//     if (!err) {
-//         res.send("user created")
-//     } else {
-//         console.log(err);
-//         res.status(500).send("user create error, " + err)
-//     }
-// });
