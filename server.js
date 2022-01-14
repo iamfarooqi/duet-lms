@@ -91,7 +91,7 @@ app.use(morgan('dev'));
 app.use(
     cors({
         credentials: true,
-        origin: ['http://127.0.0.1:5501']
+        origin: ['http://127.0.0.1:5501', 'https://iamfarooqi.github.io/duet-lms/']
 
     })
 );
