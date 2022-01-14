@@ -1,5 +1,5 @@
-const PORT = process.env.PORT || 5000;
 
+const PORT = process.env.PORT || 5000;
 var express = require("express");
 var bodyParser = require('body-parser');
 var cors = require("cors");
@@ -11,10 +11,10 @@ var cookieParser = require('cookie-parser');
 var postmark = require("postmark");
 const path = require("path");
 const axios = require('axios')
+var SERVER_SECRET = process.env.SECRET || "1234"
 
 // var client = new postmark.Client("03d41ca2-fd57-4edd-9e9e-506ac1aaf894");
 
-var SERVER_SECRET = process.env.SECRET || "1234"
 
 // var userModel = mongoose.model("users", userSchema);
 

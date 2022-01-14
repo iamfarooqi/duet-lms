@@ -1,5 +1,5 @@
-const url = "https://duet-lms.herokuapp.com"
-// const url = "http://localhost:5000"
+// const url = "https://duet-lms.herokuapp.com"
+const url = "http://localhost:5000"
 
 ///SignUP
 
