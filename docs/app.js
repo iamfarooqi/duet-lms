@@ -1,5 +1,3 @@
-// const url = "https://duet-lms.herokuapp.com";
-
 const url = "http://localhost:5000"
 
 ///SignUP
@@ -81,7 +79,7 @@ function Profile() {
             document.getElementById('phone').innerHTML = response.data.userData.phone;
             document.getElementById('dept').innerHTML = response.data.userData.dept;
             document.getElementById('batch').innerHTML = response.data.userData.batch;
-            console.log(response.data)
+            // console.log(response.data)
         },(error) => {
                 console.log(error.message);
             });
