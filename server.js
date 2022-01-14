@@ -91,19 +91,19 @@ app.use(morgan('dev'));
 app.use(
     cors({
         credentials: true,
-        origin: ['http://127.0.0.1:5501', 'https://iamfarooqi.github.io/duet-lms/']
-
+        origin: ['https://iamfarooqi.github.io' , 'http://127.0.0.1:5501'],
+        // methods: 'GET,HEAD,PUT,PATCH,DELETE' ,
     })
 );
 
 
-app.use(function (req, res, next) {
-   //Enabling CORS
-   res.header("Access-Control-Allow-Origin", "*");
-   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
-     next();
-   });
+// app.use(function (req, res, next) {
+//    //Enabling CORS
+//    res.header("Access-Control-Allow-Origin", "*");
+//    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+//    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
+//      next();
+//    });
 
 
 
