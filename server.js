@@ -1,25 +1,32 @@
 
 const PORT = process.env.PORT || 5000;
-var express = require("express");
-var bodyParser = require('body-parser');
-var cors = require("cors");
-var morgan = require("morgan");
+const express = require("express");
+const bodyParser = require('body-parser');
+const cors = require("cors");
+const morgan = require("morgan");
 const mongoose = require("mongoose");
-var bcrypt = require("bcrypt-inzi");
-var jwt = require('jsonwebtoken');
-var cookieParser = require('cookie-parser');
-var postmark = require("postmark");
+const bcrypt = require("bcrypt-inzi");
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 const path = require("path");
-const axios = require('axios')
-var SERVER_SECRET = process.env.SECRET || "1234"
-
-// var client = new postmark.Client("03d41ca2-fd57-4edd-9e9e-506ac1aaf894");
+const SERVER_SECRET = process.env.SECRET || "1234"
+const app = express();
 
 
-// var userModel = mongoose.model("users", userSchema);
-
-
-
+app.use(cookieParser());
+app.use("/", express.static(path.resolve(path.join(__dirname, "public"))));
+app.use(bodyParser.json());
+app.use(morgan('dev'));
+app.use(
+    cors({
+        credentials: true,
+        origin: ['https://iamfarooqi.github.io' , 'http://127.0.0.1:5501'],
+        // methods: 'GET,HEAD,PUT,PATCH,DELETE' ,
+    })
+    );
+    
+    
+    
 let dbURI = "mongodb+srv://duetstudents:duetstudents@studentsdata.jr39q.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 mongoose.connect(dbURI, {
     useNewUrlParser: true,
@@ -62,39 +69,9 @@ var userSchema = new mongoose.Schema({
         'default': Date.now
     }
 });
-var userModel = mongoose.model("users", userSchema);
+const userModel = mongoose.model("users", userSchema);
 
 
-var otpSchema = new mongoose.Schema({
-    "email": String,
-    "otpCode": String,
-    "createdOn": {
-        "type": Date,
-        "default": Date.now
-    },
-});
-
-
-var otpModel = mongoose.model("otps", otpSchema);
-
-module.exports = {
-    userModel: userModel,
-    otpModel: otpModel
-}
-
-var app = express();
-app.use(cookieParser());
-app.use("/", express.static(path.resolve(path.join(__dirname, "public"))));
-
-app.use(bodyParser.json());
-app.use(morgan('dev'));
-app.use(
-    cors({
-        credentials: true,
-        origin: ['https://iamfarooqi.github.io' , 'http://127.0.0.1:5501'],
-        // methods: 'GET,HEAD,PUT,PATCH,DELETE' ,
-    })
-);
 
 
 // app.use(function (req, res, next) {
