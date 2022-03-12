@@ -17,6 +17,7 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "express": "^4.17.2",
+    "firebase": "^9.6.7",
     "firebase-admin": "^10.0.1",
     "http": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",

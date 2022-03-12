@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser');
 const path = require("path");
 const SERVER_SECRET = process.env.SECRET || "1234"
 const app = express();
+const multer  = require('multer');
 
 
 app.use(cookieParser());
@@ -69,10 +70,57 @@ var userSchema = new mongoose.Schema({
         'default': Date.now
     }
 });
+
+
 const userModel = mongoose.model("users", userSchema);
 
 
 
+// Upload file
+
+app.use(bodyParser.urlencoded({extended: true}))
+// app.use('/', uploadRouter);
+// var router = express.Router();
+
+// var storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//       cb(null, './docs/uploads/')
+//     },
+//     filename: function (req, file, cb) {
+//       cb(null, Date.now()+file.originalname)
+//     }
+//   })
+ 
+//   const fileFilter=(req, file, cb)=>{
+//    if(file.mimetype ==='image/jpeg' || file.mimetype ==='image/jpg' || file.mimetype ==='image/png'){
+//        cb(null,true);
+//    }else{
+//        cb(null, false);
+//    }
+ 
+//   }
+ 
+// var upload = multer({ 
+//     storage:storage,
+//     limits:{
+//         fileSize: 1024 * 1024 * 5
+//     },
+//     fileFilter:fileFilter
+//  });
+ 
+// app.get('/',function(req,res){
+//   res.sendFile(__dirname + './index.html');
+ 
+// });
+// app.post("/fileupload",upload.single('image'),function(req,res,next){
+   
+// const filename=req.file.filename;
+//  res.json({
+//             message:"Image Uploaded Successfully",
+//             filename:filename
+//         });
+//     });
+ 
 
 // app.use(function (req, res, next) {
 //    //Enabling CORS
@@ -81,6 +129,8 @@ const userModel = mongoose.model("users", userSchema);
 //    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
 //      next();
 //    });
+
+
 
 
 

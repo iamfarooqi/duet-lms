@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Firebase File Upload</title>
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1, maximum-scale=1"
+/>
+</head>
+<body>
+<div>
+Upload Files<br />
+<input type="file" id="files" multiple /><br /><br />
+<button id="send">Upload</button>
+<p id="uploading"></p>
+<progress value="0" max="100" id="progress"></progress>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-firestore.js"></script>
+
+<script>
+// Your web app's Firebase configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyCd_rU4ft1CCdYZJCAjM8OyAVVfZ8I14LQ",
+  authDomain: "file-upload-deae7.firebaseapp.com",
+  databaseURL: "https://file-upload-deae7.firebaseio.com",
+  projectId: "file-upload-deae7",
+  storageBucket: "file-upload-deae7.appspot.com",
+  messagingSenderId: "772980880174",
+  appId: "1:772980880174:web:273969e0f628410853c0bf"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+</script>
+
+<script>
+var files = [];
+document.getElementById("files").addEventListener("change", function(e) {
+  files = e.target.files;
+  for (let i = 0; i < files.length; i++) {
+    console.log(files[i]);
+  }
+});
+
+document.getElementById("send").addEventListener("click", function() {
+  //checks if files are selected
+  if (files.length != 0) {
+    //Loops through all the selected files
+    for (let i = 0; i < files.length; i++) {
+      //create a storage reference
+      var storage = firebase.storage().ref(files[i].name);
+
+      //upload file
+      var upload = storage.put(files[i]);
+
+      //update progress bar
+      upload.on(
+        "state_changed",
+        function progress(snapshot) {
+          var percentage =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          document.getElementById("progress").value = percentage;
+        },
+
+        function error() {
+          alert("error uploading file");
+        },
+
+        function complete() {
+          document.getElementById(
+            "uploading"
+          ).innerHTML += `${files[i].name} upoaded <br />`;
+        }
+      );
+    }
+  } else {
+    alert("No file chosen");
+  }
+});
+
+function getFileUrl(filename) {
+  //create a storage reference
+  var storage = firebase.storage().ref('./');
+
+  //get file url
+  storage
+    .getDownloadURL()
+    .then(function(url) {
+      console.log(url);
+    })
+    .catch(function(error) {
+      console.log("error encountered");
+    });
+}
+</script>
+</body>
+</html>
