@@ -188,7 +188,7 @@ body {
 }
 
 .sidebar-hide .sidebar {
-    left: -250px;
+    /* left: -250px; */
 }
 
 .sidebar {
