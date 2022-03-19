@@ -273,7 +273,42 @@ app.post("/login", (req, res, next) => {
 
 //Token
 
-// 
+app.use(function (req, res, next) {
+    const authHeader = req.get("Authorization");
+    if (!authHeader) {
+        const error = new Error("Not Authenticated");
+        error.statusCode = 401;
+        throw error;
+    }
+    const token = req.get("Authorization").split(" ")[1];
+    let decodedToken = "";
+    try {
+        decodedToken = jwt.verify(token, SERVER_SECRET);
+        // console.log(decodedToken);
+        if (!decodedToken) {
+            const error = new Error("Not Authenticated");
+            error.statusCode = 401;
+            throw error;
+        } else {
+            //   console.log("else");
+            // console.log(decodedToken)
+            userModel.findById(decodedToken.id)
+                .then((user) => {
+                    console.log(user)
+                    req.userId = user._id;
+                    next();
+                })
+                .catch(() => {
+                    const error = new Error("No Admin Found");
+                    error.statusCode = 401;
+                    throw error;
+                });
+        }
+    } catch (err) {
+        err.statusCode = 500;
+        throw err;
+    }
+});
 
 app.get("/profile", (req, res, next) => {
     console.log('289', req.userId);
