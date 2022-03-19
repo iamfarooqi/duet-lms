@@ -15,7 +15,7 @@ const multer  = require('multer');
 
 
 app.use(cookieParser());
-app.use("/", express.static(path.resolve(path.join(__dirname, "public"))));
+app.use("/", express.static(path.resolve(path.join(__dirname, "docs"))));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(
