@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+</head>
+
+<body>
+    <style>
+        /* @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800,900|Open Sans:400,600,800'); */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        div,
+        input,
+        p,
+        a {
+            font-family: "Open Sans";
+            margin: 0px;
+        }
+
+        a,
+        a:hover,
+        a:focus {
+            color: inherit;
+        }
+
+
+        .container-fluid,
+        .container {
+            max-width: 1200px;
+        }
+
+        .card-container {
+            padding: 100px 0px;
+            -webkit-perspective: 1000;
+            perspective: 1000;
+        }
+
+        .profile-card-1 {
+            background-color: #FFF;
+            border-radius: 10px;
+            box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+            /* background-image: url(./Sources//book\ 01.jpg); */
+            background-position: center;
+            padding-top: 100px;
+            overflow: hidden;
+            position: relative;
+            margin: 10px auto;
+            cursor: pointer;
+            max-width: 300px;
+        }
+
+        .profile-card-1 .profile-content {
+            position: relative;
+            background-color: #FFF;
+            padding: 70px 20px 20px 20px;
+            text-align: center;
+        }
+
+        .profile-card-1 .profile-img {
+            position: absolute;
+            height: 100px;
+            left: 0px;
+            right: 0px;
+            z-index: 10;
+            top: -50px;
+            transition: all 0.25s linear;
+            transform-style: preserve-3d;
+        }
+
+        .profile-card-1 .profile-img img {
+            /* width: 10rem; */
+            margin: auto;
+            border-radius: 50%;
+            border: 5px solid #FFF;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-card-1 .profile-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #021830;
+        }
+
+        .profile-card-1 .profile-address {
+            color: #777;
+            font-size: 12px;
+            margin: 0px 0px 15px 0px;
+        }
+
+        .profile-card-1 .profile-description {
+            font-size: 13px;
+            padding: 5px 10px;
+            color: #777;
+        }
+
+        .profile-card-1 .profile-icons .fa {
+            margin: 5px;
+            color: #777;
+        }
+
+        .profile-card-1:hover {
+            box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-card-1:hover .profile-img {
+            transform: rotateY(180deg);
+        }
+    </style>
+
+
+    <div style="padding: 3rem;" class="logo">
+        <h1><b>Library Books</b></h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div style="display: flex; flex-wrap: wrap;" class="col-md-4">
+               <a href=""> <div style="padding: 2rem;" class="profile-card-2"><img width="150rem" src="../Sources/book 01.jpg" class="img img-responsive">
+                    <div class="profile-name">Book 003</div>
+                </div></a>
+               <a href=""> <div style="padding: 2rem;" class="profile-card-2"><img width="150rem" src="../Sources/book 01.jpg" class="img img-responsive">
+                    <div class="profile-name">Book 003</div>
+                </div></a>
+               <a href=""> <div style="padding: 2rem;" class="profile-card-2"><img width="150rem" src="../Sources/book 01.jpg" class="img img-responsive">
+                    <div class="profile-name">Book 003</div>
+                </div></a>
+               <a href=""> <div style="padding: 2rem;" class="profile-card-2"><img width="150rem" src="../Sources/book 01.jpg" class="img img-responsive">
+                    <div class="profile-name">Book 003</div>
+                </div></a>
+               <a href=""> <div style="padding: 2rem;" class="profile-card-2"><img width="150rem" src="../Sources/book 01.jpg" class="img img-responsive">
+                    <div class="profile-name">Book 003</div>
+                </div></a>
+               <a href=""> <div style="padding: 2rem;" class="profile-card-2"><img width="150rem" src="../Sources/book 01.jpg" class="img img-responsive">
+                    <div class="profile-name">Book 003</div>
+                </div></a>
+                
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
