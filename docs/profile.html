@@ -90,7 +90,7 @@
             <div style="text-overflow: ellipsis; overflow: hidden; width: 100px;" id="name1" class="profile_name"></div>
             <div class="job">Student</div>
           </div>
-          <i class='bx bx-log-out'></i>
+          <i class='bx bx-log-out' onclick="logout()"></i>
         </div>
       </li>
     </ul>
@@ -116,7 +116,7 @@
                       class="rounded-circle p-1 bg-primary" width="110">
                     <div class="mt-3">
                       <h4 id="name2"></h4>
-                      <p class="text-secondary mb-1">D-19/F-CS-21</p>
+                      <p class="text-secondary mb-1" id="rollnumber"></p>
                     </div>
                   </div>
                 </div>
@@ -143,15 +143,7 @@
                   </div>
                   <div class="row mb-3">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Section:</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      <p>A</p>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Mobile:</h6>
+                      <h6 class="mb-0">Mob:</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                       <p id="phone"></p>
@@ -162,8 +154,9 @@
                       <h6 class="mb-0">Email:</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      <input type="text" class="form-control">
+                      <p id="email"></p>
                     </div>
+                  </div>
                   </div>
                   <div class="row">
                     <div class="col-sm-3"></div>

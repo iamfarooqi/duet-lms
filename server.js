@@ -1,4 +1,3 @@
-
 const PORT = process.env.PORT || 5000;
 const express = require("express");
 const bodyParser = require('body-parser');
@@ -11,45 +10,35 @@ const cookieParser = require('cookie-parser');
 const path = require("path");
 const SERVER_SECRET = process.env.SECRET || "1234"
 const app = express();
-const multer  = require('multer');
 
 
 app.use(cookieParser());
 app.use("/", express.static(path.resolve(path.join(__dirname, "docs"))));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
-app.use(
-    cors({
+app.use(cors({
         credentials: true,
-        origin: ['https://iamfarooqi.github.io' , 'http://127.0.0.1:5501'],
-        // methods: 'GET,HEAD,PUT,PATCH,DELETE' ,
-    })
-    );
+        origin: ['https://iamfarooqi.github.io' , 'http://127.0.0.1:5501'],}));
     
     
-    
+
+// ******MONGODB SETUP*****// 
 let dbURI = "mongodb+srv://duetstudents:duetstudents@studentsdata.jr39q.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 mongoose.connect(dbURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
-
-
-
 mongoose.connection.on('connected', function () {
     console.log("Mongoose is connected");
 });
-
 mongoose.connection.on('disconnected', function () {
     console.log("Mongoose is disconnected");
     process.exit(1);
 });
-
 mongoose.connection.on('error', function (err) {
     console.log('Mongoose connection error: ', err);
     process.exit(1);
 });
-
 process.on('SIGINT', function () {
     console.log("app is terminating");
     mongoose.connection.close(function () {
@@ -57,11 +46,11 @@ process.on('SIGINT', function () {
         process.exit(0);
     });
 });
-
 var userSchema = new mongoose.Schema({
     name: String,
     dept: String,
     batch: String,
+    rollNumber: String,
     email: String,
     password: String,
     phone: String,
@@ -70,78 +59,16 @@ var userSchema = new mongoose.Schema({
         'default': Date.now
     }
 });
-
-
 const userModel = mongoose.model("users", userSchema);
 
 
-
-// Upload file
-
-app.use(bodyParser.urlencoded({extended: true}))
-// app.use('/', uploadRouter);
-// var router = express.Router();
-
-// var storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//       cb(null, './docs/uploads/')
-//     },
-//     filename: function (req, file, cb) {
-//       cb(null, Date.now()+file.originalname)
-//     }
-//   })
- 
-//   const fileFilter=(req, file, cb)=>{
-//    if(file.mimetype ==='image/jpeg' || file.mimetype ==='image/jpg' || file.mimetype ==='image/png'){
-//        cb(null,true);
-//    }else{
-//        cb(null, false);
-//    }
- 
-//   }
- 
-// var upload = multer({ 
-//     storage:storage,
-//     limits:{
-//         fileSize: 1024 * 1024 * 5
-//     },
-//     fileFilter:fileFilter
-//  });
- 
-// app.get('/',function(req,res){
-//   res.sendFile(__dirname + './index.html');
- 
-// });
-// app.post("/fileupload",upload.single('image'),function(req,res,next){
-   
-// const filename=req.file.filename;
-//  res.json({
-//             message:"Image Uploaded Successfully",
-//             filename:filename
-//         });
-//     });
- 
-
-// app.use(function (req, res, next) {
-//    //Enabling CORS
-//    res.header("Access-Control-Allow-Origin", "*");
-//    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-//    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
-//      next();
-//    });
-
-
-
-
-
 //******* SIGNUP ********//
-
-
 app.post("/signup", (req, res, next) => {
 
     if (!req.body.userName ||
         !req.body.userDept ||
         !req.body.userBatch ||
+        !req.body.userRollNumber ||
         !req.body.userEmail ||
         !req.body.userPassword ||
         !req.body.userPhone
@@ -169,6 +96,7 @@ app.post("/signup", (req, res, next) => {
                     "name": req.body.userName,
                     "dept": req.body.userDept,
                     "batch": req.body.userBatch,
+                    "rollNumber": req.body.userRollNumber,
                     "email": req.body.userEmail,
                     "password": hash,
                     "phone": req.body.userPhone,
@@ -201,11 +129,7 @@ app.post("/signup", (req, res, next) => {
 
 })
 
-
-
-
 //LOGIN
-
 app.post("/login", (req, res, next) => {
     console.log('body', req.body)
     if (!req.body.email || !req.body.password) {
@@ -272,7 +196,6 @@ app.post("/login", (req, res, next) => {
 })
 
 //Token
-
 app.use(function (req, res, next) {
     const authHeader = req.get("Authorization");
     if (!authHeader) {
@@ -310,12 +233,13 @@ app.use(function (req, res, next) {
     }
 });
 
+// *******PROFILE*******//
 app.get("/profile", (req, res, next) => {
     console.log('289', req.userId);
     userModel.findById(
         //   req.body.jToken.id,
         req.userId,
-        "name dept batch phone ",
+        "name dept batch phone email rollNumber",
         function (err, data) {
             if (!err) {
                 res.send({
@@ -330,7 +254,6 @@ app.get("/profile", (req, res, next) => {
     );
 });
 
-
 //LOGOUT
 app.post("/logout", (req, res, next) => {
     console.log(req.cookies)
@@ -341,10 +264,6 @@ app.post("/logout", (req, res, next) => {
     res.send("logout success");
 })
 
-
-function getRandomArbitrary(min, max) {
-    return Math.random() * (max - min) + min;
-}
 //Server
 app.listen(PORT, () => {
     console.log("server is running on: ", PORT);
