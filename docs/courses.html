@@ -1,302 +1,859 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8">
-    <!--<title> Drop Down Sidebar Menu | CodingLab </title>-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Boxiocns CDN Link -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="navbar.css">
-    <script src="./app.js"></script>
-     <link rel="stylesheet" href="./style.css">
-   </head>
-   
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="navbar.css">
+  <script src="./app.js"></script>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
 <body onload="Profile()">
-  <div  class="sidebar close">
-    <div class="logo-details" ">
-        <!-- <i class='bx bxl-c-plus-plus'> -->
-            <i class='bx bx-menu' ></i>
-            <!-- <img src="./logo.jpg" width="60px" alt=""> -->
-            <!-- </i> -->
-            <span class="logo_name">DUET</span>
-        </div>
+  <div class="sidebar close">
+    <div class="logo-details">
 
-        <ul class="nav-links" style="border: red solid 1px;">
-            <li>
-                <a href="./dashboard.html">
-                    <i class='bx bx-grid-alt' ></i>
-                    <!-- <i></i> -->
-                    <!-- <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
-                    <!-- <img src="../Sources/four-squares 123.png" width="20%"> -->
-                    <span class="link_name" >Dashboard</span>
-                </a>
-        <!-- <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">Dashboard</a></li>
-        </ul> -->
-            </li>
-            <li>
-                <a href="./courses.html">
-                    <i class='bx bxs-book-open' ></i>
-                    <span class="link_name" >Courses</span>
-                    <!-- <i></i> -->
-                    <!-- <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
-                    <!-- <img src="../Sources/four-squares 123.png" width="20%"> -->
-                </a>
-        <!-- <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">Dashboard</a></li>
-        </ul> -->
-            </li>
-            <li>
-              <a href="./courses.html">
-                  <i class='bx bx-library' ></i>
-                  <span class="link_name" >Library</span>
-              </a>
-     
-          </li>
-
-          <li>
-            <a href="./courses.html">
-                <i class='bx bx-library' ></i>
-                <span class="link_name" >Exams</span>
-            </a>
-   
-        </li>
-
-      <!-- <li>
-        <div class="iocn-link">
-          <a href="#">
-            <i class='bx bx-book-alt'></i>
-            <span class="link_name">Posts</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow' ></i>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Posts</a></li>
-          <li><a href="#">Web Design</a></li>
-          <li><a href="#">Login Form</a></li>
-          <li><a href="#">Card Design</a></li>
-        </ul>
-      </li> -->
-      <!-- <li>
-        <a href="#">
-          <i class='bx bx-pie-chart-alt-2' ></i>
-          <span class="link_name">Analytics</span>
-        </a>
-        <ul class="sub-menu ">
-          <li><a class="link_name" href="#">Analytics</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-line-chart' ></i>
-          <span class="link_name">Chart</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Chart</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link">
-          <a href="#">
-            <i class='bx bx-plug' ></i>
-            <span class="link_name">Plugins</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow' ></i>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Plugins</a></li>
-          <li><a href="#">UI Face</a></li>
-          <li><a href="#">Pigments</a></li>
-          <li><a href="#">Box Icons</a></li>
-        </ul>
-      </li> -->
-
-      <li>
-        <a href="./courses.html">
-            <i class='bx bx-download' ></i>
-            <span class="link_name" >Downloads</span>
-        </a>
-
-    </li>
-
-    <li>
-      <a href="./courses.html">
-          <i class='bx bx-library' ></i>
-          <span class="link_name" >QEC</span>
-      </a>
-      
-  </li>
-
-  <li>
-    <a href="./courses.html">
-        <i class='bx bx-like' ></i>
-        <span class="link_name" >Q&Q</span>
-    </a>
-
-</li>
-
-<li>
-  <a href="./profile.html">
-      <i class='bx bxs-user-detail' ></i>
-      <span class="link_name" >Profile</span>
-  </a>
-
-</li>
-      <!-- <li>
-        <a href="#">
-          <i class='bx bx-compass' ></i>
-          <span class="link_name">Explore</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Explore</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-history'></i>
-          <span class="link_name">History</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">History</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-cog' ></i>
-          <span class="link_name">Setting</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Setting</a></li>
-        </ul>
-      </li> -->
-
-      <li>
-    <div class="profile-details">
-      <div class="profile-content">
-        <img src="./logo.jpg" alt="profileImg">
-      </div>
-      <div class="name-job">
-        <div style="text-overflow: ellipsis; overflow: hidden; width: 100px;" id="name" class="profile_name"></div>
-        <div class="job">Student</div>
-      </div>
-      <i class='bx bx-log-out' ></i>
+      <i class='bx bx-menu'></i>
+      <span class="logo_name">DUET</span>
     </div>
-  </li>
-</ul>
-  </div>
-  <section class="home-section" >
-    <div class="home-content"  >
-      <h1 class="text">DAWOOD UET</h1></div>
-      
-      <h1 style="text-align: center;">COURSES DETAILS</h1>
-      
-      <div style="display: flex; justify-content: center; min-width: 550px;">
+    <ul class="nav-links">
+      <li>
+          <a href="./dashboard.html">
+              <i class='bx bx-grid-alt'></i>
+              <span class="link_name">Dashboard</span>
+          </a>
+      </li>
+      <li>
+          <a href="./courses.html">
+              <i class='bx bxs-book-open'></i>
+              <span class="link_name">Courses</span>
+          </a>
+      </li>
+      <li>
+          <a href="./Timetable.html">
+              <i class='bx bxs-timer'></i>
+              <span class="link_name">Time Table</span>
+          </a>
+      </li>
+      <li>
+          <a href="./library.html">
+              <i class='bx bx-library'></i>
+              <span class="link_name">Library</span>
+          </a>
+      </li>
 
-        <table  class="styled-table">
-            <thead>
-                <tr>
-                <th>S.No</th>
-                <th>Course Code</th>
-                <th>Subject</th>
-                <th>Credit Hours</th>
-                <th>...</th>
-            </tr>
-        </thead>
-        <tbody>
+      <li>
+          <a href="./exams.html">
+              <i class='bx bx-book'></i>
+              <span class="link_name">Exams</span>
+          </a>
+      </li>
+
+      <li>
+          <a href="./contact.html">
+              <i class='bx bx-mail-send'></i>
+              <span class="link_name">Contact</span>
+          </a>
+      </li>
+
+      <li>
+          <a href="./profile.html">
+              <i class='bx bxs-user-detail'></i>
+              <span class="link_name">Profile</span>
+          </a>
+      </li>
+      <li>
+          <div class="profile-details">
+              <div class="profile-content">
+                  <img src="./logo.jpg" alt="profileImg">
+              </div>
+              <div class="name-job">
+                  <div style="text-overflow: ellipsis; overflow: hidden; width: 100px;" id="name1"
+                      class="profile_name"></div>
+                  <div class="job">Student</div>
+              </div>
+              <i class='bx bx-log-out' onclick="logout()"></i>
+          </div>
+      </li>
+  </ul>
+  </div>
+  <section class="home-section">
+    <div class="home-content">
+      <h1 class="text">DAWOOD UET</h1>
+    </div>
+
+    <h2 style="text-align: center;">COURSES DETAILS</h2>
+    <!-- 1st Semester -->
+    <div>
+      <h1 style="margin-left: 12%">1st Semester:</h1>
+      <div style="display: flex; justify-content: center; min-width: 550px;">
+        <table class="styled-table">
+          <thead>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td> 
-                <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
-                    <h4 style="flex: 1 1 auto;">Th</h4>
-                    <h4 style="flex: 1 1 auto;">Lab</h4> 
-                    <h4 style="flex: 1 1 auto;"> Total</h4>
-            </td>
-                <td></td>        
-                
+              <th>S.No</th>
+              <th>Course Code</th>
+              <th>Subject</th>
+              <th>Credit Hours</th>
+              <th>...</th>
             </tr>
+          </thead>
+          <tbody>
             <tr>
-                <td>01</td>
-                <td>HUM-103</td>
-                <td><a href="courseDetail.html#func">Functional English</a></td>
-                <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
-                    <p style="flex: 1 1 auto; ">03</p>
-                    <p style="flex: 1 1 auto;">00</p> 
-                    <p style="flex: 1 1 auto;"> 03</p>
-            </td>
-                <td>Humanities</td>
-            </tr>
-            <tr>
-                <td>02</td>
-                <td>HUM-101</td>
-                <td><a href="">Pakistan studies</a> </td>
-                <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
-                    <p style="flex: 1 1 auto; ">02</p>
-                    <p style="flex: 1 1 auto;">00</p> 
-                    <p style="flex: 1 1 auto;"> 02</p>
-                <td>Humanities</td>
-            </tr><tr>
-                <td>03</td>
-                <td>BS-104</td>
-                <td><a href="">Calculus & Analytical Geometry</a> </td>
-                <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
-                    <p style="flex: 1 1 auto; ">03</p>
-                    <p style="flex: 1 1 auto;">00</p> 
-                    <p style="flex: 1 1 auto;"> 03</p>
-                <td>Basic Sciences</td>
-            </tr><tr>
-                <td>04</td>
-                <td>CSE-151</td>
-                <td><a href="">Computing Fundamental</a></td>
-                <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
-                    <p style="flex: 1 1 auto; ">03</p>
-                    <p style="flex: 1 1 auto;">01</p> 
-                    <p style="flex: 1 1 auto;"> 04</p>
-                <td>Computing</td>
-            </tr><tr>
-                <td>05</td>
-                <td>BS-107</td>
-                <td><a href=""> Applied Physics</a></td>
-                <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
-                    <p style="flex: 1 1 auto; ">03</p>
-                    <p style="flex: 1 1 auto;">01</p> 
-                    <p style="flex: 1 1 auto;"> 04</p>
-                <td>Basic Sciences</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <h4 style="flex: 1 1 auto;">Th</h4>
+                <h4 style="flex: 1 1 auto;">Lab</h4>
+                <h4 style="flex: 1 1 auto;"> Total</h4>
+              </td>
+              <td></td>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
-                <td style="padding:0 15px"> <h4>Total</h4></td>
-                <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
-                    <h4 style="flex: 1 1 auto; ">14</h4>
-                    <h4 style="flex: 1 1 auto;">02</h4> 
-                    <h4 style="flex: 1 1 auto;"> 16</h4>
-                <td></td>
+              <td>01</td>
+              <td>HUM-103</td>
+              <td><a href="courseDetail.html#func">Functional English</a></td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 03</p>
+              </td>
+              <td>Humanities</td>
             </tr>
-        </tbody>
-    </table>
+            <tr>
+              <td>02</td>
+              <td>HUM-101</td>
+              <td><a href="">Pakistan studies</a> </td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">02</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 02</p>
+              <td>Humanities</td>
+            </tr>
+            <tr>
+              <td>03</td>
+              <td>BS-104</td>
+              <td><a href="">Calculus & Analytical Geometry</a> </td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 03</p>
+              <td>Basic Sciences</td>
+            </tr>
+            <tr>
+              <td>04</td>
+              <td>CSE-151</td>
+              <td><a href="">Computing Fundamental</a></td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">01</p>
+                <p style="flex: 1 1 auto;"> 04</p>
+              <td>Computing</td>
+            </tr>
+            <tr>
+              <td>05</td>
+              <td>BS-107</td>
+              <td><a href=""> Applied Physics</a></td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">01</p>
+                <p style="flex: 1 1 auto;"> 04</p>
+              <td>Basic Sciences</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td style="padding:0 15px">
+                <h4>Total</h4>
+              </td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <h4 style="flex: 1 1 auto; ">14</h4>
+                <h4 style="flex: 1 1 auto;">02</h4>
+                <h4 style="flex: 1 1 auto;"> 16</h4>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-<!-- <p id="name"></p> -->
-<!-- <p id="name"></p> -->
-<!-- <i class='bx bx-menu' ></i> -->
-<!-- <img src="./logo.jpg" width="50em" alt=""> -->
+
+    </div>
+    <!-- 2nd Semester -->
+    <div style="margin-top: 4%;">
+      <h1 style="margin-left: 12%">2nd Semester:</h1>
+      <div style="display: flex; justify-content: center; min-width: 550px;">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Course Code</th>
+              <th>Subject</th>
+              <th>Credit Hours</th>
+              <th>...</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <h4 style="flex: 1 1 auto;">Th</h4>
+                <h4 style="flex: 1 1 auto;">Lab</h4>
+                <h4 style="flex: 1 1 auto;"> Total</h4>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>01</td>
+              <td>HUM-103</td>
+              <td><a href="courseDetail.html#func">Functional English</a></td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 03</p>
+              </td>
+              <td>Humanities</td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td>HUM-101</td>
+              <td><a href="">Pakistan studies</a> </td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">02</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 02</p>
+              <td>Humanities</td>
+            </tr>
+            <tr>
+              <td>03</td>
+              <td>BS-104</td>
+              <td><a href="">Calculus & Analytical Geometry</a> </td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 03</p>
+              <td>Basic Sciences</td>
+            </tr>
+            <tr>
+              <td>04</td>
+              <td>CSE-151</td>
+              <td><a href="">Computing Fundamental</a></td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">01</p>
+                <p style="flex: 1 1 auto;"> 04</p>
+              <td>Computing</td>
+            </tr>
+            <tr>
+              <td>05</td>
+              <td>BS-107</td>
+              <td><a href=""> Applied Physics</a></td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">01</p>
+                <p style="flex: 1 1 auto;"> 04</p>
+              <td>Basic Sciences</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td style="padding:0 15px">
+                <h4>Total</h4>
+              </td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <h4 style="flex: 1 1 auto; ">14</h4>
+                <h4 style="flex: 1 1 auto;">02</h4>
+                <h4 style="flex: 1 1 auto;"> 16</h4>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+    <!-- 3rd Semester -->
+    <div style="margin-top: 4%;">
+      <h1 style="margin-left: 12%">3rd Semester:</h1>
+      <div style="display: flex; justify-content: center; min-width: 550px;">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Course Code</th>
+              <th>Subject</th>
+              <th>Credit Hours</th>
+              <th>...</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <h4 style="flex: 1 1 auto;">Th</h4>
+                <h4 style="flex: 1 1 auto;">Lab</h4>
+                <h4 style="flex: 1 1 auto;"> Total</h4>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>01</td>
+              <td>HUM-103</td>
+              <td><a href="courseDetail.html#func">Functional English</a></td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 03</p>
+              </td>
+              <td>Humanities</td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td>HUM-101</td>
+              <td><a href="">Pakistan studies</a> </td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">02</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 02</p>
+              <td>Humanities</td>
+            </tr>
+            <tr>
+              <td>03</td>
+              <td>BS-104</td>
+              <td><a href="">Calculus & Analytical Geometry</a> </td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 03</p>
+              <td>Basic Sciences</td>
+            </tr>
+            <tr>
+              <td>04</td>
+              <td>CSE-151</td>
+              <td><a href="">Computing Fundamental</a></td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">01</p>
+                <p style="flex: 1 1 auto;"> 04</p>
+              <td>Computing</td>
+            </tr>
+            <tr>
+              <td>05</td>
+              <td>BS-107</td>
+              <td><a href=""> Applied Physics</a></td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">01</p>
+                <p style="flex: 1 1 auto;"> 04</p>
+              <td>Basic Sciences</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td style="padding:0 15px">
+                <h4>Total</h4>
+              </td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <h4 style="flex: 1 1 auto; ">14</h4>
+                <h4 style="flex: 1 1 auto;">02</h4>
+                <h4 style="flex: 1 1 auto;"> 16</h4>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+    <!-- 4th Semester -->
+    <div style="margin-top: 4%;">
+      <h1 style="margin-left: 12%">4th Semester:</h1>
+      <div style="display: flex; justify-content: center; min-width: 550px;">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Course Code</th>
+              <th>Subject</th>
+              <th>Credit Hours</th>
+              <th>...</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <h4 style="flex: 1 1 auto;">Th</h4>
+                <h4 style="flex: 1 1 auto;">Lab</h4>
+                <h4 style="flex: 1 1 auto;"> Total</h4>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>01</td>
+              <td>HUM-103</td>
+              <td><a href="courseDetail.html#func">Functional English</a></td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 03</p>
+              </td>
+              <td>Humanities</td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td>HUM-101</td>
+              <td><a href="">Pakistan studies</a> </td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">02</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 02</p>
+              <td>Humanities</td>
+            </tr>
+            <tr>
+              <td>03</td>
+              <td>BS-104</td>
+              <td><a href="">Calculus & Analytical Geometry</a> </td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 03</p>
+              <td>Basic Sciences</td>
+            </tr>
+            <tr>
+              <td>04</td>
+              <td>CSE-151</td>
+              <td><a href="">Computing Fundamental</a></td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">01</p>
+                <p style="flex: 1 1 auto;"> 04</p>
+              <td>Computing</td>
+            </tr>
+            <tr>
+              <td>05</td>
+              <td>BS-107</td>
+              <td><a href=""> Applied Physics</a></td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">01</p>
+                <p style="flex: 1 1 auto;"> 04</p>
+              <td>Basic Sciences</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td style="padding:0 15px">
+                <h4>Total</h4>
+              </td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <h4 style="flex: 1 1 auto; ">14</h4>
+                <h4 style="flex: 1 1 auto;">02</h4>
+                <h4 style="flex: 1 1 auto;"> 16</h4>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+    <!-- 5th Semester -->
+    <div style="margin-top: 4%;">
+      <h1 style="margin-left: 12%">5th Semester:</h1>
+      <div style="display: flex; justify-content: center; min-width: 550px;">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Course Code</th>
+              <th>Subject</th>
+              <th>Credit Hours</th>
+              <th>...</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <h4 style="flex: 1 1 auto;">Th</h4>
+                <h4 style="flex: 1 1 auto;">Lab</h4>
+                <h4 style="flex: 1 1 auto;"> Total</h4>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>01</td>
+              <td>HUM-103</td>
+              <td><a href="courseDetail.html#func">Functional English</a></td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 03</p>
+              </td>
+              <td>Humanities</td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td>HUM-101</td>
+              <td><a href="">Pakistan studies</a> </td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">02</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 02</p>
+              <td>Humanities</td>
+            </tr>
+            <tr>
+              <td>03</td>
+              <td>BS-104</td>
+              <td><a href="">Calculus & Analytical Geometry</a> </td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 03</p>
+              <td>Basic Sciences</td>
+            </tr>
+            <tr>
+              <td>04</td>
+              <td>CSE-151</td>
+              <td><a href="">Computing Fundamental</a></td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">01</p>
+                <p style="flex: 1 1 auto;"> 04</p>
+              <td>Computing</td>
+            </tr>
+            <tr>
+              <td>05</td>
+              <td>BS-107</td>
+              <td><a href=""> Applied Physics</a></td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">01</p>
+                <p style="flex: 1 1 auto;"> 04</p>
+              <td>Basic Sciences</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td style="padding:0 15px">
+                <h4>Total</h4>
+              </td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <h4 style="flex: 1 1 auto; ">14</h4>
+                <h4 style="flex: 1 1 auto;">02</h4>
+                <h4 style="flex: 1 1 auto;"> 16</h4>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+    <!-- 6th Semester -->
+    <div style="margin-top: 4%;">
+      <h1 style="margin-left: 12%">6th Semester:</h1>
+      <div style="display: flex; justify-content: center; min-width: 550px;">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Course Code</th>
+              <th>Subject</th>
+              <th>Credit Hours</th>
+              <th>...</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <h4 style="flex: 1 1 auto;">Th</h4>
+                <h4 style="flex: 1 1 auto;">Lab</h4>
+                <h4 style="flex: 1 1 auto;"> Total</h4>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>01</td>
+              <td>HUM-103</td>
+              <td><a href="courseDetail.html#func">Functional English</a></td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 03</p>
+              </td>
+              <td>Humanities</td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td>HUM-101</td>
+              <td><a href="">Pakistan studies</a> </td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">02</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 02</p>
+              <td>Humanities</td>
+            </tr>
+            <tr>
+              <td>03</td>
+              <td>BS-104</td>
+              <td><a href="">Calculus & Analytical Geometry</a> </td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 03</p>
+              <td>Basic Sciences</td>
+            </tr>
+            <tr>
+              <td>04</td>
+              <td>CSE-151</td>
+              <td><a href="">Computing Fundamental</a></td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">01</p>
+                <p style="flex: 1 1 auto;"> 04</p>
+              <td>Computing</td>
+            </tr>
+            <tr>
+              <td>05</td>
+              <td>BS-107</td>
+              <td><a href=""> Applied Physics</a></td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">01</p>
+                <p style="flex: 1 1 auto;"> 04</p>
+              <td>Basic Sciences</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td style="padding:0 15px">
+                <h4>Total</h4>
+              </td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <h4 style="flex: 1 1 auto; ">14</h4>
+                <h4 style="flex: 1 1 auto;">02</h4>
+                <h4 style="flex: 1 1 auto;"> 16</h4>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+    <!-- 7th Semester -->
+    <div style="margin-top: 4%;">
+      <h1 style="margin-left: 12%">7th Semester:</h1>
+      <div style="display: flex; justify-content: center; min-width: 550px;">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Course Code</th>
+              <th>Subject</th>
+              <th>Credit Hours</th>
+              <th>...</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <h4 style="flex: 1 1 auto;">Th</h4>
+                <h4 style="flex: 1 1 auto;">Lab</h4>
+                <h4 style="flex: 1 1 auto;"> Total</h4>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>01</td>
+              <td>HUM-103</td>
+              <td><a href="courseDetail.html#func">Functional English</a></td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 03</p>
+              </td>
+              <td>Humanities</td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td>HUM-101</td>
+              <td><a href="">Pakistan studies</a> </td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">02</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 02</p>
+              <td>Humanities</td>
+            </tr>
+            <tr>
+              <td>03</td>
+              <td>BS-104</td>
+              <td><a href="">Calculus & Analytical Geometry</a> </td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 03</p>
+              <td>Basic Sciences</td>
+            </tr>
+            <tr>
+              <td>04</td>
+              <td>CSE-151</td>
+              <td><a href="">Computing Fundamental</a></td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">01</p>
+                <p style="flex: 1 1 auto;"> 04</p>
+              <td>Computing</td>
+            </tr>
+            <tr>
+              <td>05</td>
+              <td>BS-107</td>
+              <td><a href=""> Applied Physics</a></td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">01</p>
+                <p style="flex: 1 1 auto;"> 04</p>
+              <td>Basic Sciences</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td style="padding:0 15px">
+                <h4>Total</h4>
+              </td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <h4 style="flex: 1 1 auto; ">14</h4>
+                <h4 style="flex: 1 1 auto;">02</h4>
+                <h4 style="flex: 1 1 auto;"> 16</h4>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+    <!--8th Semester  -->
+    <div style="margin-top: 4%;">
+      <h1 style="margin-left: 12%">8th Semester:</h1>
+      <div style="display: flex; justify-content: center; min-width: 550px;">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Course Code</th>
+              <th>Subject</th>
+              <th>Credit Hours</th>
+              <th>...</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <h4 style="flex: 1 1 auto;">Th</h4>
+                <h4 style="flex: 1 1 auto;">Lab</h4>
+                <h4 style="flex: 1 1 auto;"> Total</h4>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>01</td>
+              <td>HUM-103</td>
+              <td><a href="courseDetail.html#func">Functional English</a></td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 03</p>
+              </td>
+              <td>Humanities</td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td>HUM-101</td>
+              <td><a href="">Pakistan studies</a> </td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">02</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 02</p>
+              <td>Humanities</td>
+            </tr>
+            <tr>
+              <td>03</td>
+              <td>BS-104</td>
+              <td><a href="">Calculus & Analytical Geometry</a> </td>
+              <td style="display: flex; align-items: center; padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">00</p>
+                <p style="flex: 1 1 auto;"> 03</p>
+              <td>Basic Sciences</td>
+            </tr>
+            <tr>
+              <td>04</td>
+              <td>CSE-151</td>
+              <td><a href="">Computing Fundamental</a></td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">01</p>
+                <p style="flex: 1 1 auto;"> 04</p>
+              <td>Computing</td>
+            </tr>
+            <tr>
+              <td>05</td>
+              <td>BS-107</td>
+              <td><a href=""> Applied Physics</a></td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <p style="flex: 1 1 auto; ">03</p>
+                <p style="flex: 1 1 auto;">01</p>
+                <p style="flex: 1 1 auto;"> 04</p>
+              <td>Basic Sciences</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td style="padding:0 15px">
+                <h4>Total</h4>
+              </td>
+              <td style="display: flex; align-items: center;  padding: 0px; text-align: center;">
+                <h4 style="flex: 1 1 auto; ">14</h4>
+                <h4 style="flex: 1 1 auto;">02</h4>
+                <h4 style="flex: 1 1 auto;"> 16</h4>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
 
   </section>
   <script>
-  let arrow = document.querySelectorAll(".arrow");
-  for (var i = 0; i < arrow.length; i++) {
-    arrow[i].addEventListener("click", (e)=>{
-   let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-   arrowParent.classList.toggle("showMenu");
+    let arrow = document.querySelectorAll(".arrow");
+    for (var i = 0; i < arrow.length; i++) {
+      arrow[i].addEventListener("click", (e) => {
+        let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+        arrowParent.classList.toggle("showMenu");
+      });
+    }
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".bx-menu");
+    // console.log(sidebarBtn);
+    sidebarBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("close");
     });
-  }
-  let sidebar = document.querySelector(".sidebar");
-  let sidebarBtn = document.querySelector(".bx-menu");
-  // console.log(sidebarBtn);
-  sidebarBtn.addEventListener("click", ()=>{
-    sidebar.classList.toggle("close");
-  });
   </script>
 </body>
+
 </html>

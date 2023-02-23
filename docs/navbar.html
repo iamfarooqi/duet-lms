@@ -1,215 +1,103 @@
 <!DOCTYPE html>
-<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8">
-    <!--<title> Drop Down Sidebar Menu | CodingLab </title>-->
-    <link rel="stylesheet" href="navbar.css">
-    <!-- Boxiocns CDN Link -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <script src="./app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-     <!-- <link rel="stylesheet" href="./style.css"> -->
-   </head>
-   
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./app.js"></script>
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="navbar.css">
+</head>
+
 <body onload="Profile()">
-  <div  class="sidebar close">
+  <div class="sidebar close">
     <div class="logo-details" ">
-        <!-- <i class='bx bxl-c-plus-plus'> -->
             <i class='bx bx-menu' ></i>
-            <!-- <img src="./logo.jpg" width="60px" alt=""> -->
-            <!-- </i> -->
-            <span class="logo_name">DUET</span>
-        </div>
+            <span class=" logo_name">DUET</span>
+    </div>
 
-        <ul class="nav-links" style="border: red solid 1px;">
-            <li>
-                <a href="./dashboard.html">
-                    <i class='bx bx-grid-alt' ></i>
-                    <!-- <i></i> -->
-                    <!-- <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
-                    <!-- <img src="../Sources/four-squares 123.png" width="20%"> -->
-                    <span class="link_name" >Dashboard</span>
-                </a>
-        <!-- <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">Dashboard</a></li>
-        </ul> -->
-            </li>
-            <li>
-                <a href="./courses.html">
-                    <i class='bx bxs-book-open' ></i>
-                    <span class="link_name" >Courses</span>
-                    <!-- <i></i> -->
-                    <!-- <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
-                    <!-- <img src="../Sources/four-squares 123.png" width="20%"> -->
-                </a>
-        <!-- <ul class="sub-menu blank">
-            <li><a class="link_name" href="#">Dashboard</a></li>
-        </ul> -->
-            </li>
-            <li>
-              <a href="./courses.html">
-                  <i class='bx bx-library' ></i>
-                  <span class="link_name" >Library</span>
-              </a>
-     
-          </li>
-
-          <li>
-            <a href="./courses.html">
-                <i class='bx bx-library' ></i>
-                <span class="link_name" >Exams</span>
+    <ul class="nav-links">
+        <li>
+            <a href="./dashboard.html">
+                <i class='bx bx-grid-alt'></i>
+                <span class="link_name">Dashboard</span>
             </a>
-   
+        </li>
+        <li>
+            <a href="./courses.html">
+                <i class='bx bxs-book-open'></i>
+                <span class="link_name">Courses</span>
+            </a>
+        </li>
+        <li>
+            <a href="./Timetable.html">
+                <i class='bx bxs-timer'></i>
+                <span class="link_name">Time Table</span>
+            </a>
+        </li>
+        <li>
+            <a href="./library.html">
+                <i class='bx bx-library'></i>
+                <span class="link_name">Library</span>
+            </a>
         </li>
 
-      <!-- <li>
-        <div class="iocn-link">
-          <a href="#">
-            <i class='bx bx-book-alt'></i>
-            <span class="link_name">Posts</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow' ></i>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Posts</a></li>
-          <li><a href="#">Web Design</a></li>
-          <li><a href="#">Login Form</a></li>
-          <li><a href="#">Card Design</a></li>
-        </ul>
-      </li> -->
-      <!-- <li>
-        <a href="#">
-          <i class='bx bx-pie-chart-alt-2' ></i>
-          <span class="link_name">Analytics</span>
-        </a>
-        <ul class="sub-menu ">
-          <li><a class="link_name" href="#">Analytics</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-line-chart' ></i>
-          <span class="link_name">Chart</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Chart</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="iocn-link">
-          <a href="#">
-            <i class='bx bx-plug' ></i>
-            <span class="link_name">Plugins</span>
-          </a>
-          <i class='bx bxs-chevron-down arrow' ></i>
-        </div>
-        <ul class="sub-menu">
-          <li><a class="link_name" href="#">Plugins</a></li>
-          <li><a href="#">UI Face</a></li>
-          <li><a href="#">Pigments</a></li>
-          <li><a href="#">Box Icons</a></li>
-        </ul>
-      </li> -->
+        <li>
+            <a href="./exams.html">
+                <i class='bx bx-book'></i>
+                <span class="link_name">Exams</span>
+            </a>
+        </li>
 
-      <li>
-        <a href="./courses.html">
-            <i class='bx bx-download' ></i>
-            <span class="link_name" >Downloads</span>
-        </a>
+        <li>
+            <a href="./contact.html">
+                <i class='bx bx-mail-send'></i>
+                <span class="link_name">Contact</span>
+            </a>
+        </li>
 
-    </li>
-
-    <li>
-      <a href="./courses.html">
-          <i class='bx bx-library' ></i>
-          <span class="link_name" >QEC</span>
-      </a>
-      
-  </li>
-
-  <li>
-    <a href="./courses.html">
-        <i class='bx bx-like' ></i>
-        <span class="link_name" >Q&Q</span>
-    </a>
-
-</li>
-
-<li>
-  <a href="./courses.html">
-      <i class='bx bxs-user-detail' ></i>
-      <span class="link_name" >Profile</span>
-  </a>
-
-</li>
-      <!-- <li>
-        <a href="#">
-          <i class='bx bx-compass' ></i>
-          <span class="link_name">Explore</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Explore</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-history'></i>
-          <span class="link_name">History</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">History</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-cog' ></i>
-          <span class="link_name">Setting</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Setting</a></li>
-        </ul>
-      </li> -->
-
-
-      <li>
-    <div class="profile-details">
-      <div class="profile-content">
-        <img src="./logo.jpg" alt="profileImg">
-      </div>
-      <div class="name-job">
-        <div style="text-overflow: ellipsis; overflow: hidden; width: 100px;" id="name" class="profile_name"></div>
-        <div class="job">Student</div>
-      </div>
-      <i class='bx bx-log-out' ></i>
-    </div>
-  </li>
-</ul>
+        <li>
+            <a href="./profile.html">
+                <i class='bx bxs-user-detail'></i>
+                <span class="link_name">Profile</span>
+            </a>
+        </li>
+        <li>
+            <div class="profile-details">
+                <div class="profile-content">
+                    <img src="./logo.jpg" alt="profileImg">
+                </div>
+                <div class="name-job">
+                    <div style="text-overflow: ellipsis; overflow: hidden; width: 100px;" id="name1"
+                        class="profile_name"></div>
+                    <div class="job">Student</div>
+                </div>
+                <i class='bx bx-log-out' onclick="logout()"></i>
+            </div>
+        </li>
+    </ul>
   </div>
-  <section class="home-section" >
-    <div class="home-content"  >
-      <h1 class="text">DAWOOD UET</h1></div>
-<!-- <p id="name"></p> -->
-<!-- <p id="name"></p> -->
-<!-- <i class='bx bx-menu' ></i> -->
-<!-- <img src="./logo.jpg" width="50em" alt=""> -->
-
+  <section class="home-section">
+    <div class="home-content">
+      <h1 class="text">DAWOOD UET</h1>
+    </div>
   </section>
   <script>
-  let arrow = document.querySelectorAll(".arrow");
-  for (var i = 0; i < arrow.length; i++) {
-    arrow[i].addEventListener("click", (e)=>{
-   let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
-   arrowParent.classList.toggle("showMenu");
+    let arrow = document.querySelectorAll(".arrow");
+    for (var i = 0; i < arrow.length; i++) {
+      arrow[i].addEventListener("click", (e) => {
+        let arrowParent = e.target.parentElement.parentElement;
+        arrowParent.classList.toggle("showMenu");
+      });
+    }
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".bx-menu");
+    // console.log(sidebarBtn);
+    sidebarBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("close");
     });
-  }
-  let sidebar = document.querySelector(".sidebar");
-  let sidebarBtn = document.querySelector(".bx-menu");
-  // console.log(sidebarBtn);
-  sidebarBtn.addEventListener("click", ()=>{
-    sidebar.classList.toggle("close");
-  });
   </script>
 </body>
+
 </html>

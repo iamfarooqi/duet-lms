@@ -1,6 +1,6 @@
-var url = "https://duet-lms.vercel.app/";
-
+const url = "https://duet-lms.herokuapp.com"
 // const url = "http://localhost:5000"
+
 
 ///SignUP
 
@@ -13,6 +13,7 @@ function signup() {
             userName: document.getElementById("name").value,
             userDept: document.getElementById("dept").value,
             userBatch: document.getElementById("batch").value,
+            userRollNumber: document.getElementById("rollnumber").value,
             userEmail: document.getElementById("email").value,
             userPassword: document.getElementById("password").value,
             userPhone: document.getElementById("phone").value
@@ -35,7 +36,6 @@ function signup() {
 ///Login
 
 function login() {
-    // idhar login karogay to token milega usko localstorage mai save karana
     axios({
         method: 'post',
         url: url + "/login",
@@ -48,7 +48,6 @@ function login() {
         // console.log(response);
         // alert(response.user)
         alert(response.data.message)
-        // !!! idhr
         localStorage.setItem('token', response.data.token)
 
         window.location.href = "./dashboard.html"
@@ -81,6 +80,8 @@ function Profile() {
             document.getElementById('phone').innerHTML = response.data.userData.phone;
             document.getElementById('dept').innerHTML = response.data.userData.dept;
             document.getElementById('batch').innerHTML = response.data.userData.batch;
+            document.getElementById('email').innerHTML = response.data.userData.email;
+            document.getElementById('rollnumber').innerHTML = response.data.userData.rollNumber;
             console.log(response.data)
         }, (error) => {
             console.log(error.message);
@@ -111,7 +112,6 @@ function logout() {
     });
     return false
 }
-
 
 
 
