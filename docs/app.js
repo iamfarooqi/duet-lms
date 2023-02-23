@@ -1,6 +1,6 @@
-// var url = "https://duet-lms.herokuapp.com/";
+var url = "https://duet-lms.vercel.app/";
 
-const url = "http://localhost:5000"
+// const url = "http://localhost:5000"
 
 ///SignUP
 
@@ -38,7 +38,7 @@ function login() {
     // idhar login karogay to token milega usko localstorage mai save karana
     axios({
         method: 'post',
-        url: url +"/login",
+        url: url + "/login",
         data: {
             email: document.getElementById("login-email").value,
             password: document.getElementById("login-password").value,
@@ -82,9 +82,9 @@ function Profile() {
             document.getElementById('dept').innerHTML = response.data.userData.dept;
             document.getElementById('batch').innerHTML = response.data.userData.batch;
             console.log(response.data)
-        },(error) => {
-                console.log(error.message);
-            });
+        }, (error) => {
+            console.log(error.message);
+        });
     return false
 }
 
@@ -101,8 +101,8 @@ function logout() {
             // 'Access-Control-Allow-Origin': '*'
             // aur ayaha par token bhejogay har reqeust pr ok
             authorization: `Bearer ${localStorage.getItem("token")}`,
-        },withCredentials: true
-        
+        }, withCredentials: true
+
     }).then((response) => {
         console.log(response);
         window.location.href = "login.html"

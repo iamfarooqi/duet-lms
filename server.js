@@ -11,13 +11,7 @@ var cookieParser = require('cookie-parser');
 var postmark = require("postmark");
 const path = require("path");
 const axios = require('axios')
-
-// var client = new postmark.Client("03d41ca2-fd57-4edd-9e9e-506ac1aaf894");
-
 var SERVER_SECRET = process.env.SECRET || "1234"
-
-// var userModel = mongoose.model("users", userSchema);
-
 
 
 let dbURI = "mongodb+srv://duetstudents:duetstudents@studentsdata.jr39q.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -91,21 +85,10 @@ app.use(morgan('dev'));
 app.use(
     cors({
         credentials: true,
-        origin: ['http://127.0.0.1:5501']
+        origin: ['http://127.0.0.1:5501', 'https://duet-lms.vercel.app/']
 
     })
 );
-
-
-// app.use(function (req, res, next) {
-//    //Enabling CORS
-//    res.header("Access-Control-Allow-Origin", "*");
-//    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-//    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
-//      next();
-//    });
-
-
 
 //******* SIGNUP ********//
 
@@ -173,8 +156,6 @@ app.post("/signup", (req, res, next) => {
     })
 
 })
-
-
 
 
 //LOGIN
