@@ -91,7 +91,7 @@ app.use(morgan('dev'));
 app.use(
     cors({
         credentials: true,
-        origin: ['http://127.0.0.1:5501', 'https://duet-lms.vercel.app/']
+        origin: ['http://127.0.0.1:5501', 'https://duet-lms.vercel.app/', 'https://duet-lms.vercel.app']
 
     })
 );
